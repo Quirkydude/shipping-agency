@@ -1,0 +1,432 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   CSS Custom Properties (Design Tokens)
+   ============================================================ */
+:root {
+  /* Brand colors */
+  --primary: #FF0707;
+  --primary-hover: #cc0000;
+  --secondary: #00C5FF;
+  --secondary-hover: #0099cc;
+  --dark: #00042E;
+  --dark-light: #1a1e4a;
+  --text: #000;
+  --text-light: #555;
+  --bg-light: #fafafa;
+  --bg-white: #fff;
+  --border: #ddd;
+
+  /* Typography - fluid scale using clamp() */
+  --text-xs: clamp(0.7rem, 0.75vw, 0.8rem);
+  --text-sm: clamp(0.8rem, 0.9vw, 0.9rem);
+  --text-base: clamp(0.9rem, 1vw, 1rem);
+  --text-lg: clamp(1rem, 1.2vw, 1.1rem);
+  --text-xl: clamp(1.2rem, 1.8vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 2.5vw, 2rem);
+  --text-3xl: clamp(1.8rem, 3.5vw, 3rem);
+  --text-4xl: clamp(2rem, 4.5vw, 3.5rem);
+
+  /* Spacing */
+  --section-padding: clamp(2rem, 4vw, 4rem);
+  --container-max: 1200px;
+  --gap-sm: 0.5rem;
+  --gap-md: 1rem;
+  --gap-lg: 1.5rem;
+  --gap-xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.1);
+  --shadow-lg: 0 8px 24px rgba(0,0,0,0.12);
+  --shadow-card: 0 2px 8px rgba(0,0,0,0.08);
+  --shadow-glow: 0 0 20px rgba(255,7,7,0.15);
+
+  /* Transitions */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-spring: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg-white);
+  margin: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   Focus Styles (Accessibility)
+   ============================================================ */
+:focus-visible {
+  outline: 2px solid var(--secondary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================
+   Keyframe Animations
+   ============================================================ */
+
+/* Fade in + slide up — for scroll reveals */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fade in — for overlays, results */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Scale in — for hero content */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide in from left — for hero text */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse glow — for buttons */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255,7,7,0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(255,7,7,0);
+  }
+}
+
+/* Shimmer — for loading/skeleton */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Float — subtle hover float */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* Counter — for stats numbers */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================================
+   Scroll-Reveal Animation Classes
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-6 { transition-delay: 0.6s; }
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+
+/* Container */
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+/* Responsive Grid System */
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-xl);
+  align-items: start;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap-lg);
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap-lg);
+}
+
+/* Section spacing */
+.section-padding {
+  padding: var(--section-padding) 0;
+}
+
+/* ============================================================
+   Component Classes
+   ============================================================ */
+.section-label {
+  color: var(--secondary);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: var(--secondary);
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-secondary:hover {
+  background: var(--secondary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(0,197,255,0.2);
+}
+
+.btn-secondary:active {
+  transform: translateY(0);
+}
+
+/* Hero Banner */
+.hero-banner {
+  position: relative;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.hero-banner .overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.6) 100%);
+}
+
+.hero-banner .content {
+  position: relative;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 1rem;
+  width: 100%;
+  text-align: center;
+  animation: scaleIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.hero-banner h1 {
+  color: #fff;
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  animation: slideInLeft 0.8s 0.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.hero-banner p {
+  color: rgba(255,255,255,0.85);
+  font-size: var(--text-lg);
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto;
+  animation: fadeInUp 0.8s 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* Card Hover Effects */
+.card-hover {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.card-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Image zoom on hover */
+.img-zoom {
+  overflow: hidden;
+}
+
+.img-zoom img {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-zoom:hover img {
+  transform: scale(1.1);
+}
+
+/* ============================================================
+   Responsive Breakpoints
+   ============================================================ */
+
+/* Tablet: 1024px and below */
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-banner {
+    min-height: 350px;
+    background-attachment: scroll;
+  }
+}
+
+/* Mobile large: 768px and below */
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero-banner {
+    min-height: 300px;
+    background-attachment: scroll;
+  }
+
+  .hero-banner h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .hero-banner p {
+    font-size: var(--text-base);
+  }
+}
+
+/* Mobile small: 480px and below */
+@media (max-width: 480px) {
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-banner {
+    min-height: 280px;
+  }
+
+  .hero-banner h1 {
+    font-size: 1.6rem;
+  }
+
+  .section-label {
+    font-size: var(--text-sm);
+  }
+}
