@@ -149,9 +149,9 @@ export const siteConfig = {
 
   // ── Global Branches / Locations ──────────────
   branches: [
+    { country: "United States", flag: "🇺🇸" },
     { country: "Philippines", flag: "🇵🇭" },
     { country: "United Kingdom", flag: "🇬🇧" },
-    { country: "United States", flag: "🇺🇸" },
     { country: "Germany", flag: "🇩🇪" },
     { country: "UAE", flag: "🇦🇪" },
     { country: "Singapore", flag: "🇸🇬" },
