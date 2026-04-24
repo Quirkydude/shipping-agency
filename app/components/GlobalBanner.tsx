@@ -38,7 +38,8 @@ export default function GlobalBanner() {
         background: `linear-gradient(135deg, ${primary} 0%, #cc0000 50%, ${secondary} 100%)`,
         color: "#fff",
         overflow: "hidden",
-        position: "relative",
+        position: "sticky",
+        top: 0,
         zIndex: 101,
         maxHeight: visible ? 60 : 0,
         opacity: visible ? 1 : 0,
@@ -90,7 +91,7 @@ export default function GlobalBanner() {
               display: "flex",
               gap: "1.5rem",
               whiteSpace: "nowrap",
-              animation: "bannerScroll 20s linear infinite",
+              animation: "bannerScroll 35s linear infinite",
               width: "max-content",
             }}
           >
@@ -171,7 +172,7 @@ export default function GlobalBanner() {
           }
           .banner-ticker-track {
             gap: 1rem !important;
-            animation-duration: 15s !important;
+            animation-duration: 25s !important;
           }
         }
 
@@ -185,7 +186,7 @@ export default function GlobalBanner() {
           }
           .banner-ticker-track {
             gap: 0.75rem !important;
-            animation-duration: 12s !important;
+            animation-duration: 20s !important;
           }
         }
       `}</style>
