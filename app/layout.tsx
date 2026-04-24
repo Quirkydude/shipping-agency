@@ -4,6 +4,7 @@ import { siteConfig } from "@/config/siteConfig";
 import Header from "@/app/components/layout/Header";
 import Footer from "@/app/components/layout/Footer";
 import ScrollRevealProvider from "@/app/components/ScrollRevealProvider";
+import GlobalBanner from "@/app/components/GlobalBanner";
 
 export const metadata: Metadata = {
   title: `Home | ${siteConfig.name}`,
@@ -19,6 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ScrollRevealProvider />
+        <GlobalBanner />
         <Header />
         <main>{children}</main>
         <Footer />

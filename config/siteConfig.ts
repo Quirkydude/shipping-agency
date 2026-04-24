@@ -147,6 +147,18 @@ export const siteConfig = {
     "Warehouse Solutions",
   ],
 
+  // ── Global Branches / Locations ──────────────
+  branches: [
+    { country: "Philippines", flag: "🇵🇭" },
+    { country: "United Kingdom", flag: "🇬🇧" },
+    { country: "United States", flag: "🇺🇸" },
+    { country: "Germany", flag: "🇩🇪" },
+    { country: "UAE", flag: "🇦🇪" },
+    { country: "Singapore", flag: "🇸🇬" },
+    { country: "Australia", flag: "🇦🇺" },
+    { country: "Canada", flag: "🇨🇦" },
+  ],
+
   // ── Footer ───────────────────────────────────
   footerTagline: "©AdvancedSecurityShipping, All Rights Reserved.",
   foundedYear: "1990",
