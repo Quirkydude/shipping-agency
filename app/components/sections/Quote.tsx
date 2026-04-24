@@ -70,8 +70,8 @@ export default function Quote() {
               </div>
               <div className="form-row" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "1rem" }}>
                 <input style={inputStyle} type="tel" placeholder="Your Mobile" aria-label="Your Mobile" />
-                <select style={{ ...inputStyle, color: "#999" }} aria-label="Select Service">
-                  <option value="" disabled selected>
+                <select style={{ ...inputStyle, color: "#999" }} aria-label="Select Service" defaultValue="">
+                  <option value="" disabled>
                     Select Service
                   </option>
                   {siteConfig.serviceOptions.map((opt) => (
